@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Forbidden Notes</title>
+    <style>
+        body {
+            background-color: #000;
+            color: #0f0;
+            font-family: monospace;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            overflow: hidden;
+            position: relative;
+        }
+        .random-characters {
+            font-size: 1rem; /* Smaller font size */
+            white-space: pre; /* Preserve whitespace and line breaks */
+            width: 100%;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            position: absolute;
+            top: 0;
+            left: 0;
+            z-index: 1;
+        }
+        .center-image {
+            position: absolute;
+            z-index: 2;
+            border: 5px solid #0f0; /* Green border */
+            padding: 10px;
+            background-color: #000; /* Black background */
+            max-width: 50%; /* Further reduce image size */
+            height: auto; /* Maintain aspect ratio */
+        }
+        .content {
+            font-size: 1rem;
+            color: #fff;
+            background-color: #000;
+            padding: 20px;
+            display: none; /* Hide content initially */
+        }
+    </style>
+</head>
+<body>
+    <div class="random-characters" id="random-characters"></div>
+    <img src="{{ url_for('static', filename='Access Denied.png') }}" alt="Access Denied" class="center-image" id="access-denied-image">
+    <div class="content" id="content">
+        <p>1. A system uses a two-level paging scheme with a 4 KB page size. If the logical address space is 64-bit, and the first-level page table contains 512 entries, how many bits are used for the second-level page index?</p>
+        <p>Answer: 9 bits</p>
+        <p>Explanation: A 64-bit address space means we have 64 bits for addressing. A 4 KB page size means offset bits = log2(4096)=12 bits. The first-level page table has 512 entries, which requires log2(512)=9 bits. The remaining bits for the second-level index: 64−12−9=43 bits. Since this is a two-level paging scheme, the second-level page index should be 9 bits, matching the first-level index (assuming equal division).</p>
+        <p>2. A hard disk has 8 platters, each with 2 surfaces. If each surface has 1000 tracks, and each track contains 512 sectors, how many total sectors are available on the disk?</p>
+        <p>Answer: 8,192,000 sectors</p>
+        <p>Explanation: Platters: 8 Surfaces per platter: 2 → Total surfaces = 8×2=16 Tracks per surface: 1000 → Total tracks = 16×1000=16,000 Sectors per track: 512 Total sectors = 16,000×512=8,192,000</p>
+        <p>3. A system has a disk with an average seek time of 4 ms, a rotational speed of 10,000 RPM, and a transfer rate of 150 MB/s. How long does it take to read a 512-byte sector?</p>
+        <p>Answer: 0.1043 ms</p>
+        <p>Explanation: Average seek time = 4 ms Rotational latency: 60/10,000 seconds per revolution → Half rotation = 60/2×10,000=3 ms Transfer time for 512 bytes: 512/150×10^6 seconds = 0.00000341 ms Total access time ≈ Seek time + Rotational latency + Transfer time 4+3+0.00000341=7.00000341 ms (to locate and start transfer) Time to transfer a single sector is negligible compared to seek and latency.</p>
+        <p>4. A CPU has a pipeline with 5 stages. If each stage takes 1 ns and there are 100 instructions to execute, how long will it take assuming no stalls?</p>
+        <p>Answer: 104 ns</p>
+        <p>Explanation: The first instruction completes in 5 ns (5 pipeline stages). Each new instruction enters the pipeline every 1 ns after the first. Total time for 100 instructions: 5+(100−1)×1=104 ns.</p>
+        <p>5. A system has 16 GB of RAM and a page size of 2 MB. How many pages exist in the system?</p>
+        <p>Answer: 8192 pages</p>
+        <p>Explanation: 16 GB = 16×1024 MB = 16,384 MB Number of pages = 16,384/2=8192.</p>
+        <p>6. A CPU takes 300 cycles to perform a context switch. If the CPU operates at 2.5 GHz, how much time (in microseconds) is spent during one context switch?</p>
+        <p>Answer: 0.12 μs</p>
+        <p>Explanation: CPU clock period = 1/2.5×10^9 = 0.4 ns per cycle. Context switch takes 300 cycles → 300×0.4=120 ns = 0.12 μs.</p>
+        <p>7. A system has a TLB with 64 entries. If the page size is 8 KB and the system has 4 GB of RAM, what is the TLB coverage (total memory mapped by TLB)?</p>
+        <p>Answer: 512 MB</p>
+        <p>Explanation: Each TLB entry maps one page. Each page = 8 KB TLB coverage = 64×8 KB = 512 KB Since each entry maps 64 pages in the worst case, total memory mapped = 512 MB.</p>
+        <p>8. A virtual memory system uses a 3-level page table. The page size is 4 KB, and each table entry is 8 bytes. If a 64-bit system is used, how much memory is required to store a fully populated page table?</p>
+        <p>Answer: 256 TB</p>
+        <p>Explanation: 64-bit address → 4 KB pages → 12-bit offset. Remaining address bits: 64−12=52 bits. Divided into 3 levels: 52 bits → 3 tables → 52/3≈17 bits per table. Each table has 2^17 entries = 128K entries. Each entry = 8 bytes. Memory per table = 2^17×8=1 MB. Total memory = 3×2^17×8=256 TB (if fully populated).</p>
+        <p>9. A RAID-5 system has 5 disks, each with 2 TB of storage. What is the usable capacity?</p>
+        <p>Answer: 8 TB</p>
+        <p>Explanation: RAID-5 uses 1 disk for parity. Total storage = 5 × 2 TB = 10 TB Usable storage = 10−2=8 TB (since 1 disk is used for parity).</p>
+        <p>10. A system with 16 processors has a parallel program that executes in 10 seconds on a single core. If the program is perfectly parallelizable, what is the expected execution time on 16 cores?</p>
+        <p>Answer: 0.625 seconds</p>
+        <p>Explanation: Amdahl’s Law (assuming perfect scaling): Execution time = Serial Time / Number of Cores 10/16=0.625 seconds.</p>
+    </div>
+
+    <script>
+        function getRandomCharacter() {
+            const characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
+            return characters.charAt(Math.floor(Math.random() * characters.length));
+        }
+
+        function generateRandomCharacters() {
+            const element = document.getElementById('random-characters');
+            const lines = Math.floor(window.innerHeight / 20); // Number of lines based on window height
+            const charsPerLine = Math.floor(window.innerWidth / 10); // Characters per line based on window width
+            let randomText = '';
+            for (let i = 0; i < lines; i++) {
+                let line = '';
+                for (let j = 0; j < charsPerLine; j++) {
+                    line += getRandomCharacter();
+                }
+                randomText += line + '\n';
+            }
+            element.textContent = randomText;
+        }
+
+        setInterval(generateRandomCharacters, 100); // Change characters every 100ms
+        window.addEventListener('resize', generateRandomCharacters); // Regenerate characters on window resize
+        generateRandomCharacters(); // Initial generation
+
+        // Show content if access is granted
+        const showContent = {{ show_content|tojson }};
+        if (showContent) {
+            document.getElementById('content').style.display = 'block';
+            document.getElementById('random-characters').style.display = 'none';
+            document.getElementById('access-denied-image').style.display = 'none';
+            setTimeout(function() {
+                alert('GDG{d0nT_cH3@t_1n_ur_3x@m$}');
+            }, 1000); // Delay the popup by 2 seconds
+        }
+    </script>
+</body>
+</html>
