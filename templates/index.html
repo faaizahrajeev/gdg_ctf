@@ -40,6 +40,7 @@
             flex-direction: column;
             align-items: center;
             margin-bottom: 40px; /* More space below the outer box */
+            flex: 1;
         }
         .chat-box {
             height: 300px; /* Make the chat box smaller */
@@ -85,6 +86,12 @@
         button:hover {
             background-color: #666;
         }
+        .footer {
+            width: 100%;
+            background-color: #000;
+            height: 50px; /* Height of the footer */
+            flex-shrink: 0;
+        }
     </style>
 </head>
 <body>
@@ -98,9 +105,8 @@
             <input type="text" id="query" name="query" placeholder="Seek knowledge..." required>
             <button type="submit">Send</button>
         </form>
-        <br><br><br><br>
     </div>
-
+    <div class="footer"></div>
     <script>
         $(document).ready(function() {
             $('#query-form').on('submit', function(event) {
